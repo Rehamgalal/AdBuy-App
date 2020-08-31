@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splash">
+
+    <fragment
+        android:id="@+id/splash"
+        android:name="com.example.adbuy.ui.SplashScreen"
+        android:label="@string/first_fragment_label"
+        tools:layout="@layout/fragment_first">
+
+        <action
+            android:id="@+id/action_Splash_to_OnBoarding"
+            app:destination="@id/onboarding" />
+    </fragment>
+    <fragment
+        android:id="@+id/onboarding"
+        android:name="com.example.adbuy.ui.OnBoarding"
+        android:label="@string/second_fragment_label"
+        tools:layout="@layout/fragment_second">
+        <action
+            android:id="@+id/action_onboarding_to_signUp"
+            app:destination="@id/signUp" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUp"
+        android:name="com.example.adbuy.ui.SignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUp_to_signIn"
+            app:destination="@id/signIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/signIn"
+        android:name="com.example.adbuy.ui.SignIn"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signIn_to_signUp"
+            app:destination="@id/signUp" />
+        <action
+            android:id="@+id/action_signIn_to_forgetPassword"
+            app:destination="@id/forgetPssword" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPssword"
+        android:name="com.example.adbuy.ui.ForgetPssword"
+        android:label="fragment_forget_pssword"
+        tools:layout="@layout/fragment_forget_pssword" >
+        <action
+            android:id="@+id/action_forgetPssword_to_signUp"
+            app:destination="@id/signUp" />
+    </fragment>
+</navigation>
