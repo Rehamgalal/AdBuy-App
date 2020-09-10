@@ -1,4 +1,4 @@
-package com.example.adbuy.ui
+package com.example.adbuy.ui.fragment
 
 import android.os.Bundle
 import android.text.InputFilter
@@ -13,11 +13,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.adbuy.R
+import com.example.adbuy.model.`object`.login.Login
+import com.example.adbuy.other.Resource
+import com.example.adbuy.other.Validation
 import com.example.adbuy.viewmodel.AdBuyViewModel
 import kotlinx.android.synthetic.main.fragment_sign_in.*
 import kotlinx.android.synthetic.main.fragment_sign_in.email
 import kotlinx.android.synthetic.main.fragment_sign_in.password
-import kotlinx.android.synthetic.main.fragment_sign_up.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -58,9 +60,6 @@ class SignIn : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        password.filters = arrayOf(InputFilter { source, _, _, _, _, _ ->
-            source.toString().filterNot { it.isWhitespace() }
-        })
         signup.setOnClickListener {
             findNavController().navigate(R.id.action_signIn_to_signUp)
         }
@@ -68,50 +67,47 @@ class SignIn : Fragment() {
             findNavController().navigate(R.id.action_signIn_to_forgetPassword)
         }
         loginp_button.setOnClickListener {
-            if (email.text.toString().isValidEmail() ){
-                if (password.text.toString().length<8)
-                {
-                    password.setText("Password should be 8 or more characters")
-                }else{
-                    job = lifecycleScope.launch {
-                        viewModel.safeLoginCall(email.text.toString(),password.text.toString())
-                    }
-                }
+            if (Validation.validateLoginInput(email, password)) {
+                viewModel.loginAdBuy(Login(email.text.toString(),password.text.toString()))
             }else{
-                email.setText("Email Invalid")
+                Validation.validateLoginInputError(email, password)
             }
 
         }
-        viewModel.userData.observe(viewLifecycleOwner, Observer {
-            if (it.data==null){
-                Timber.e("Login Failed")
-            }else if (it.data!!.status==200){
-                //Go to main screen
-                Toast.makeText(context,"should be directed to main screen",Toast.LENGTH_LONG).show()
-            }else if (it.data!!.status==401){
-                email.setText("email or password is wrong")
-                password.setText("email or password is wrong")
-            }
-        })
-    }
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SignIn.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SignIn().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+        viewModel.userData.observe(viewLifecycleOwner, Observer { response ->
+            when (response) {
+                is Resource.Success -> {
+                    hideProgressbar()
+                    Toast.makeText(context, "should be directed to main screen", Toast.LENGTH_LONG).show()
+                }
+                is Resource.Error -> {
+                    response.message?.let {
+                        hideProgressbar()
+                        Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+
+                        Timber.e(it)
+
+                    }
+
+
+                }
+                is Resource.Loading -> {
+                    showProgressbar()
                 }
             }
+        })
+
     }
-    fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+
+
+
+    private fun hideProgressbar() {
+        progressBar.visibility = View.INVISIBLE
+    }
+
+    private fun showProgressbar() {
+        progressBar.visibility = View.VISIBLE
+    }
+
+
 }

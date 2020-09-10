@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.adbuy.BuildConfig
 import com.example.adbuy.api.AdBuyApi
+import com.example.adbuy.db.BuyDatabase
+import com.example.adbuy.other.Constants.ADBUY_DATABASE_NAME
 import com.example.adbuy.other.Constants.BASE_URL
 import com.example.adbuy.other.Constants.SHARED_PREFERENCES_NAME
 import dagger.Module
@@ -26,7 +28,7 @@ object AppModule  {
         SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE
     )
 
-    /*@Provides
+    @Provides
     fun providerRoomDatabase(@ApplicationContext app: Context) = Room.databaseBuilder(
         app,
         BuyDatabase::class.java,
@@ -34,7 +36,7 @@ object AppModule  {
     ).build()
     @Singleton
     @Provides
-    fun provideRunDao(db: BuyDatabase) = db.getDao()*/
+    fun provideRunDao(db: BuyDatabase) = db.getDao()
     @Provides
     @Singleton
     fun provideOkHttpClient() = if (BuildConfig.DEBUG) {

@@ -1,4 +1,4 @@
-package com.example.adbuy.ui
+package com.example.adbuy.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import com.example.adbuy.R
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -28,8 +29,8 @@ class SplashScreen : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        GlobalScope.async {
-            delay(5000)
+        runBlocking {
+            delay(3000)
             findNavController().navigate(R.id.action_Splash_to_OnBoarding)
 
         }

@@ -5,15 +5,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.SignIn">
-
-
+    tools:context=".ui.fragment.SignIn">
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/logo1"
             app:layout_constraintBottom_toTopOf="@id/image"
-            android:src="@drawable/logo1" />
+            app:layout_constraintTop_toTopOf="parent" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
@@ -25,16 +24,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             android:src="@drawable/signuploginbackground"
             />
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintTop_toTopOf="@id/image"
             android:text="Signup"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"
             android:id="@+id/signup"
             android:textSize="20sp"
             android:textColor="@color/colorAccent"
-            android:layout_margin="40dp"/>
+            android:layout_margin="30dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,7 +45,7 @@
             android:textSize="20sp"
             android:textColor="@android:color/white"
             android:layout_margin="40dp"/>
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="0dp"
             app:layout_constraintWidth_percent="0.6"
             android:layout_height="wrap_content"
@@ -59,7 +60,7 @@
             android:textColorHint="@color/offwhite"
             android:backgroundTint="@color/offwhite"
             app:layout_constraintVertical_chainStyle="packed"/>
-        <EditText
+        <com.google.android.material.textfield.TextInputEditText
             android:layout_width="0dp"
             app:layout_constraintWidth_percent="0.6"
             android:layout_height="wrap_content"
@@ -96,15 +97,31 @@
             app:layout_constraintStart_toStartOf="@id/image"
             app:layout_constraintEnd_toEndOf="@id/image"
             android:layout_marginTop="20dp"/>
-        <TextView
+        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/skip"
             app:layout_constraintTop_toBottomOf="@id/image"
             app:layout_constraintEnd_toEndOf="@id/image"
             android:textColor="@color/colorAccent"
+            android:textAllCaps="false"
+            android:background="@android:color/transparent"
             android:text="Skip"
             android:textSize="20dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="20dp"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="23dp"
+            app:layout_constraintBottom_toTopOf="@+id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            tools:visibility="invisible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splash"
-        android:name="com.example.adbuy.ui.SplashScreen"
+        android:name="com.example.adbuy.ui.fragment.SplashScreen"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_first">
 
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/onboarding"
-        android:name="com.example.adbuy.ui.OnBoarding"
+        android:name="com.example.adbuy.ui.fragment.OnBoarding"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_second">
         <action
@@ -26,7 +26,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUp"
-        android:name="com.example.adbuy.ui.SignUp"
+        android:name="com.example.adbuy.ui.fragment.SignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -35,7 +35,7 @@
     </fragment>
     <fragment
         android:id="@+id/signIn"
-        android:name="com.example.adbuy.ui.SignIn"
+        android:name="com.example.adbuy.ui.fragment.SignIn"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -47,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/forgetPssword"
-        android:name="com.example.adbuy.ui.ForgetPssword"
+        android:name="com.example.adbuy.ui.fragment.ForgetPssword"
         android:label="fragment_forget_pssword"
         tools:layout="@layout/fragment_forget_pssword" >
         <action

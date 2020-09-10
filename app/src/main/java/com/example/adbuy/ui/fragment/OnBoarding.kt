@@ -1,4 +1,4 @@
-package com.example.adbuy.ui
+package com.example.adbuy.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -34,7 +34,7 @@ class OnBoarding : Fragment() {
            swipePages(view_pager.currentItem)
         }
         skip.setOnClickListener {
-            swipePages(view_pager.currentItem)
+            findNavController().navigate(R.id.action_onboarding_to_signUp)
         }
         view_pager.addOnPageChangeListener(object :ViewPager.OnPageChangeListener{
             override fun onPageScrollStateChanged(state: Int) {
